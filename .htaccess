@@ -1,0 +1,15 @@
+Options -Indexes
+
+RewriteEngine On
+
+# If it's an existing directory, let it through
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# If it's an existing file AND not .php, let it through
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_FILENAME} !\.php$ [NC]
+RewriteRule ^ - [L]
+
+# Everything else goes to index.php
+RewriteRule ^ index.php [L]
