@@ -21,11 +21,18 @@ app::get("/cars/{id}", function($id){
 
 });
 
-app::get("/cars/{brand}/{model}", function($brand){
+app::get("/cars/{brand}/model/{id}", function($brand, $id){
 
-    echo("A " . $brand . " ");
+    echo("A " . $brand . " with id: " . $id);
 
 });
+
+app::get("/cars/{brand}/{model}/{id}", function($brand, $model, $id){
+
+    echo("A " . $brand . " " . $model . " with id: " . $id);
+
+});
+
 
 
 // Old routes:

@@ -34,22 +34,22 @@ class App
         $uri = str_replace("/router2025", "", $uri);
         $uri = explode("?", $uri)[0];
 
-        /*  $regex = preg_replace('/\{(.*?)\}/', '([^/]+)', $uri); */
-
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach (self::$routes[$method] as $route) {
 
             if (preg_match_all($route["regex"], $uri, $matches)) {
 
-                /* self::debug($matches); */
+                array_shift($matches); // Tar bort första elementet ur array
 
-                $params = $matches[1];
+                $params = array_map(function ($item) {
+                    return $item[0];
+                }, $matches);
+
 
                 call_user_func_array($route["cb"], $params);
                 return;
-            } 
-            
+            }
         }
         include("404.html");
     }
